@@ -1,0 +1,16 @@
+- name: Run using a project directory
+  hosts: docker
+  gather_facts: no
+  tasks:
+    - name: Tear down existing services
+      docker_compose:
+        project_src: observability--ansible-docker-kubernetes-
+        state: absent
+
+    - name: Create and start services
+      docker_compose:
+        project_src: observability--ansible-docker-kubernetes-
+      register: output
+
+    - debug:
+        var: output
