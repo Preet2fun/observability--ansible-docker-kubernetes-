@@ -3,10 +3,10 @@
   gather_facts: no
   tasks:
     - name: Running docker-compose.yml down
-      command: docker-compose down -d
+      command: docker-compose down
     
     - name: Running docker-compose.yml up
-      command: docker-compose up -d
+      command: docker-compose up
       register: output
 
     - debug:
