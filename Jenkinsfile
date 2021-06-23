@@ -35,8 +35,10 @@ pipeline{
                     sh "docker login -u preet2fun -p ${dockerHubPwd}"
                 }
                 
-                sh "docker push preet2fun/mainapp:${DOCKER_TAG} "
-                sh "docker push preet2fun/webnginxapp:${DOCKER_TAG} "
+                //sh "docker push preet2fun/mainapp:${DOCKER_TAG} "
+                //sh "docker push preet2fun/webnginxapp:${DOCKER_TAG} "
+                sh "docker push preet2fun/mainapp:latest "
+                sh "docker push preet2fun/webnginxapp:latest "
             }
         }
         
