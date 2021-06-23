@@ -11,23 +11,33 @@ pipeline{
                 url: 'https://github.com/Preet2fun/observability-ansible-docker-kubernetes.git'
             }
         }
-        /*        
-        stage('Docker Build'){
+                
+        stage('Docker Build App'){
             steps{
-                sh "docker build . -t preet2fun/hariapp:${DOCKER_TAG} "
+                sh "cd app/"
+                sh "docker build . -t preet2fun/mainapp:${DOCKER_TAG} "
+            }
+        }
+
+        stage('Docker Build Web'){
+            steps{
+                sh "cd web/"
+                sh "docker build . -t preet2fun/webnginxapp:${DOCKER_TAG} "
             }
         }
         
         stage('DockerHub Push'){
             steps{
+                //withCredentials([string(credentialsId: 'docker-hub', variable: 'dockerHubPwd')])
                 withCredentials([string(credentialsId: 'docker-hub', variable: 'dockerHubPwd')]) {
-                    sh "docker login -u kammana -p ${dockerHubPwd}"
+                    sh "docker login -u preet2fun -p ${dockerHubPwd}"
                 }
                 
-                sh "docker push kammana/hariapp:${DOCKER_TAG} "
+                sh "docker push preet2fun/mainapp:${DOCKER_TAG} "
+                sh "docker push preet2fun/webnginxapp:${DOCKER_TAG} "
             }
         }
-        
+        /*
         stage('Docker Deploy'){
             steps{
               ansiblePlaybook credentialsId: 'dev-server', disableHostKeyChecking: true, extras: "-e DOCKER_TAG=${DOCKER_TAG}", installation: 'ansible', inventory: 'dev.inv', playbook: 'deploy-docker.yml'
