@@ -15,7 +15,8 @@ services:
       - MYSQL_ROOT_PASSWORD_FILE=/run/secrets/db-password
   
   app:
-    build: app
+    #build: app
+    image: preet2fun/mainapp:latest
     restart: always
     secrets:
       - db-password
@@ -24,7 +25,8 @@ services:
       - frontend-network
 
   web:
-    build: web
+    #build: web
+    image: preet2fun/webnginxapp:latest
     restart: always
     ports:
       - 80:80
