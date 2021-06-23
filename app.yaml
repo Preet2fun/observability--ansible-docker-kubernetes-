@@ -2,14 +2,11 @@
   hosts: docker
   gather_facts: no
   tasks:
-    - name: Tear down existing services
-      docker_compose:
-        project_src: observability--ansible-docker-kubernetes-
-        state: absent
-
-    - name: Create and start services
-      docker_compose:
-        project_src: observability--ansible-docker-kubernetes-
+    - name: Running docker-compose.yml
+      command: docker-compose down -d
+    
+    - name: Running docker-compose.yml
+      command: docker-compose up -d
       register: output
 
     - debug:
