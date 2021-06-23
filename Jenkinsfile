@@ -14,15 +14,15 @@ pipeline{
                 
         stage('Docker Build App'){
             steps{
-                sh "cd app/"
-                sh "docker build . -t preet2fun/mainapp:${DOCKER_TAG} "
+                //sh "cd app/"
+                sh "docker build /var/lib/jenkins/workspace/docker-ansible-app-cicd/app -t preet2fun/mainapp:${DOCKER_TAG} "
             }
         }
 
         stage('Docker Build Web'){
             steps{
-                sh "cd web/"
-                sh "docker build . -t preet2fun/webnginxapp:${DOCKER_TAG} "
+                //sh "cd web/"
+                sh "docker build /var/lib/jenkins/workspace/docker-ansible-app-cicd/web -t preet2fun/webnginxapp:${DOCKER_TAG} "
             }
         }
         
