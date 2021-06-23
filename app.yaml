@@ -2,11 +2,15 @@
   hosts: docker
   gather_facts: no
   tasks:
-    - name: Running docker-compose.yml down
-      command: docker-compose down
+    - name: Running docker-compose down
+      docker_compose:
+        project_src: /root/docker-ansible-build
+        state: absent
+      #command: docker-compose down
     
-    - name: Running docker-compose.yml up
-      command: docker-compose up
+    - name: Running docker-compose up
+      docker_compose:
+        project_src: /root/docker-ansible-build
       register: output
 
     - debug:

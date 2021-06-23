@@ -40,6 +40,7 @@ pipeline{
         
         stage('Docker Deploy'){
             steps{
+              sh "scp -r * root@172.16.9.95://root/docker-ansible-build"  
               ansiblePlaybook become: true, credentialsId: 'deployment-server', disableHostKeyChecking: true, installation: 'Ansible', inventory: 'docker_host.ini', playbook: 'app.yaml'  
               //ansiblePlaybook credentialsId: 'dev-server', disableHostKeyChecking: true, extras: "-e DOCKER_TAG=${DOCKER_TAG}", installation: 'ansible', inventory: 'dev.inv', playbook: 'deploy-docker.yml'
             }
